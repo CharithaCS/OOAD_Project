@@ -1,4 +1,4 @@
-#include <cmath> 
+#include <cmath>
 #include <algorithm>
 #include <vector>
 #include <QDebug>
@@ -62,7 +62,10 @@ void ChessModel::setupStartingPosition() {
 void ChessModel::setupFromFEN(const std::string& fen) {
     if (!FenUtils::parseFen(fen, *this)) {
          qWarning("Failed to parse provided FEN string: %s", fen.c_str());
+         return;
     }
+    updateCurrentValidMoves();
+    updateGameStatus();
 }
 
 std::string ChessModel::getCurrentFEN() const {
